@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: multi-agent-rag-interview-coach
+Version: 0.1.0
+Summary: A multi-agent RAG-based technical interview coaching platform.
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: langgraph>=0.1.0
+Requires-Dist: langchain>=0.0.362
+Requires-Dist: google-generativeai>=1.0.0
+Requires-Dist: chromadb>=0.4.0
+Requires-Dist: pydantic>=2.10
+Requires-Dist: streamlit>=1.25
+Requires-Dist: PyPDF2>=3.0
+Requires-Dist: sentence-transformers>=2.2
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: fastapi>=0.109
+Requires-Dist: uvicorn>=0.23
+Requires-Dist: pytest>=8.4
+Requires-Dist: pytest-asyncio>=0.22
+Requires-Dist: httpx>=0.28
+Requires-Dist: rich>=13.0
+Requires-Dist: numpy>=1.25

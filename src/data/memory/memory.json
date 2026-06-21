@@ -1,0 +1,24 @@
+{
+  "s1": [
+    {
+      "feedback": "ok"
+    }
+  ],
+  "demo": [
+    {
+      "feedback": [
+        "ok"
+      ],
+      "weak_topics": [
+        "rag"
+      ],
+      "strong_topics": [
+        "python"
+      ],
+      "adaptive_roadmap": [
+        "study rag"
+      ],
+      "question_count": 1
+    }
+  ]
+}
