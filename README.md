@@ -1,5 +1,4 @@
-# Multi-Agent RAG Interview Coach
-# Multi-Agent RAG Interview Coach
+# AI Agent for Students
 
 Capstone-grade multi-agent interview preparation system built with LangGraph, LangChain, Google Gemini embeddings, ChromaDB, Streamlit, SQLite, and Pydantic.
 

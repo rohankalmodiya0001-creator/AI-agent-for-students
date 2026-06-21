@@ -1,4 +1,4 @@
-# Multi-Agent RAG Interview Coach
+# AI Agent for Students
 
 ## Phase 1: Architecture Design
 
