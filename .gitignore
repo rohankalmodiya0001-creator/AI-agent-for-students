@@ -9,9 +9,12 @@ venv/
 .vscode/
 *.sqlite3
 *.db
+# Persistent runtime artifacts (mounted/created at runtime)
+src/data/app.db
 src/data/embeddings/
 src/data/raw_documents/
 .env
+
 .env.*
 .DS_Store
 pytest_cache/

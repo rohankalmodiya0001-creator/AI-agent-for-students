@@ -1,0 +1,4 @@
+# Prevent Streamlit cache/assets from being bundled/committed
+.cache/
+secrets.toml
+
