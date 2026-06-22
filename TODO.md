@@ -1,10 +1,13 @@
 # TODO - Fix ephemeral storage / bundle size error
 
-- [ ] Update repo to avoid bundling large data at build time (Docker image/Streamlit packaging)
-  - [x] Inspect and update `.dockerignore`
-  - [ ] Confirm any other large folders that are not ignored (e.g., `src/data/*`, `*.tar.gz`, etc.)
-- [ ] Ensure runtime data is volume-mounted, not copied into the image
-  - [x] Add comment clarifying data should be mounted at runtime in `Dockerfile`
-- [ ] Rebuild/redeploy (after cleaning build cache)
-- [ ] If still failing on Streamlit Cloud bundling: adjust deployment packaging (gitignore / remove large files)
+- [ ] Identify whether deployment is via Streamlit Cloud (Python bundle) or Docker (image build)
+- [ ] Remove large persistent data from repo and ensure it is excluded from bundling
+  - [ ] Ensure `src/data/**` is not committed (raw_documents, embeddings, memory, sqlite/db)
+  - [ ] Ensure `.gitignore` and `.dockerignore` exclude these directories
+- [ ] Update Dockerfile to avoid copying excluded/unnecessary large folders
+  - [ ] Prefer `COPY src ./src` and copy only required small assets
+- [ ] Verify local build: `docker build .` (should stay small)
+- [ ] Re-deploy and confirm bundle size < 500MB
+
+- [ ] If still failing, inspect the deployment logs to locate the biggest bundled folder/file
 
