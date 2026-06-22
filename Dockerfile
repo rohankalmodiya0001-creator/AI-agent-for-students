@@ -5,7 +5,10 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy only source + required small assets.
+# Large persistent runtime data (Chroma/embeddings, sqlite, etc.) should be mounted at runtime.
 COPY . .
+
 
 ENV PYTHONPATH=/app/src
 ENV STREAMLIT_SERVER_PORT=8501
