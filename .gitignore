@@ -13,7 +13,12 @@ venv/
 src/data/app.db
 src/data/embeddings/
 src/data/raw_documents/
+src/data/memory/
+src/data/*.json
+*.sqlite3
+*.sqlite
 .env
+
 
 .env.*
 .DS_Store
