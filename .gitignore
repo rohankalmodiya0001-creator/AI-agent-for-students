@@ -3,7 +3,6 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-env/
 .venv/
 venv/
 .idea/
@@ -11,7 +10,12 @@ venv/
 *.sqlite3
 *.db
 src/data/embeddings/
+src/data/raw_documents/
 .env
 .env.*
 .DS_Store
 pytest_cache/
+.build/
+dist/
+*.log
+
