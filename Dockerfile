@@ -2,8 +2,8 @@ FROM python:3.14-slim
 
 WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements-full.txt ./
+RUN pip install --no-cache-dir -r requirements-full.txt
 
 # Copy only source + required small assets.
 # Large persistent runtime data (Chroma/embeddings, sqlite, etc.) should be mounted at runtime.
