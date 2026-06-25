@@ -2,6 +2,9 @@
 port = 8501
 enableCORS = false
 
-# Reduce what Streamlit tries to persist in the app bundle.
-# (Actual large persistence should live in src/data and be created/mounted at runtime.)
-
+[theme]
+primaryColor = "#6366f1"
+backgroundColor = "#0b0f19"
+secondaryBackgroundColor = "#131c31"
+textColor = "#f8fafc"
+font = "sans serif"

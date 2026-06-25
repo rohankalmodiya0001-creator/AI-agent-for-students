@@ -29,6 +29,22 @@ def render_learning_roadmap() -> None:
 
     if roadmap_path.exists():
         roadmap = json.loads(roadmap_path.read_text(encoding="utf-8"))
-        st.subheader("Recommended Learning Steps")
-        for step in roadmap:
-            st.markdown(f"- {step}")
+        st.markdown("<br><hr style='opacity: 0.15;'><br>", unsafe_allow_html=True)
+        st.subheader("🏁 Recommended Learning Steps")
+        
+        # Timeline wrapper
+        st.markdown('<div style="margin-top: 1.5rem;">', unsafe_allow_html=True)
+        for idx, step in enumerate(roadmap):
+            st.markdown(
+                f"""
+                <div class="timeline-item">
+                    <div class="timeline-step">Step {idx + 1}</div>
+                    <div class="custom-card" style="margin-top:0.25rem; margin-bottom:0; padding: 1.2rem;">
+                        {step}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        st.markdown('</div>', unsafe_allow_html=True)
+

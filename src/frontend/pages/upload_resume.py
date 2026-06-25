@@ -32,5 +32,64 @@ def render_upload_resume() -> None:
 
     resume_profile = load_json("resume_profile.json")
     if resume_profile:
-        st.subheader("Parsed Resume Profile")
-        st.json(resume_profile)
+        st.markdown("<br><hr style='opacity: 0.15;'><br>", unsafe_allow_html=True)
+        st.subheader("📝 Parsed Resume Profile")
+        
+        # Grid layout for Skills & Technologies
+        cols = st.columns(2)
+        with cols[0]:
+            st.markdown('<div class="custom-card">', unsafe_allow_html=True)
+            st.markdown("#### 🛠️ Core Skills")
+            skills = resume_profile.get("skills", [])
+            if skills:
+                # Group pills in a container
+                pill_html = "".join([f'<span class="pill-badge">{skill}</span>' for skill in skills])
+                st.markdown(f'<div style="margin-top:0.5rem;">{pill_html}</div>', unsafe_allow_html=True)
+            else:
+                st.write("*No skills parsed.*")
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+        with cols[1]:
+            st.markdown('<div class="custom-card">', unsafe_allow_html=True)
+            st.markdown("#### 💻 Technologies & Frameworks")
+            techs = resume_profile.get("technologies", [])
+            if techs:
+                pill_html = "".join([f'<span class="pill-badge pill-badge-green">{tech}</span>' for tech in techs])
+                st.markdown(f'<div style="margin-top:0.5rem;">{pill_html}</div>', unsafe_allow_html=True)
+            else:
+                st.write("*No technologies parsed.*")
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        # Experience & Projects & Certifications
+        st.markdown('<div class="custom-card">', unsafe_allow_html=True)
+        st.markdown("#### 💼 Experience Summary")
+        exp = resume_profile.get("experience", "")
+        if exp:
+            st.write(exp)
+        else:
+            st.write("*No work experience details parsed.*")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+        cols2 = st.columns(2)
+        with cols2[0]:
+            st.markdown('<div class="custom-card" style="height: 100%;">', unsafe_allow_html=True)
+            st.markdown("#### 🚀 Projects")
+            projects = resume_profile.get("projects", [])
+            if projects:
+                for proj in projects:
+                    st.markdown(f"**•** {proj}")
+            else:
+                st.write("*No projects parsed.*")
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        with cols2[1]:
+            st.markdown('<div class="custom-card" style="height: 100%;">', unsafe_allow_html=True)
+            st.markdown("#### 📜 Certifications & Achievements")
+            certs = resume_profile.get("certifications", [])
+            if certs:
+                pill_html = "".join([f'<span class="pill-badge pill-badge-yellow">{cert}</span>' for cert in certs])
+                st.markdown(f'<div style="margin-top:0.5rem;">{pill_html}</div>', unsafe_allow_html=True)
+            else:
+                st.write("*No certifications parsed.*")
+            st.markdown('</div>', unsafe_allow_html=True)
+

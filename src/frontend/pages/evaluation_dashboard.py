@@ -13,13 +13,16 @@ def render_evaluation_dashboard() -> None:
         return
 
     col1, col2, col3, col4, col5 = st.columns(5)
-    col1.metric("Technical", f"{trends.get('technical_score', 0):.1f}")
-    col2.metric("Communication", f"{trends.get('communication_score', 0):.1f}")
-    col3.metric("Problem Solving", f"{trends.get('problem_solving_score', 0):.1f}")
-    col4.metric("Confidence", f"{trends.get('confidence_score', 0):.1f}")
-    col5.metric("Readiness", f"{trends.get('readiness_score', 0):.1f}")
+    col1.metric("Technical", f"{trends.get('technical_score', 0):.1f}%")
+    col2.metric("Communication", f"{trends.get('communication_score', 0):.1f}%")
+    col3.metric("Problem Solving", f"{trends.get('problem_solving_score', 0):.1f}%")
+    col4.metric("Confidence", f"{trends.get('confidence_score', 0):.1f}%")
+    col5.metric("Readiness", f"{trends.get('readiness_score', 0):.1f}%")
 
-    st.markdown("### Trend Snapshot")
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.subheader("📈 Performance Trend Snapshot")
+    
+    st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     trend_table = {
         "Metric": ["Technical", "Communication", "Problem Solving", "Confidence", "Readiness"],
         "Score": [
@@ -31,29 +34,68 @@ def render_evaluation_dashboard() -> None:
         ],
     }
     st.bar_chart(trend_table, x="Metric", y="Score", use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
     left, right = st.columns(2)
     with left:
-        st.markdown("### Weak Areas")
+        st.markdown('<div class="custom-card status-card-danger" style="height: 100%;">', unsafe_allow_html=True)
+        st.markdown("#### 🔴 Weak Areas to Focus")
         weak_topics = trends.get("weak_topics", [])
         if weak_topics:
-            for topic in weak_topics:
-                st.write(f"- {topic}")
+            pill_html = "".join([f'<span class="pill-badge pill-badge-red">{topic}</span>' for topic in weak_topics])
+            st.markdown(f'<div style="margin-top:0.5rem;">{pill_html}</div>', unsafe_allow_html=True)
         else:
-            st.write("- None recorded yet")
+            st.write("*None recorded yet. Keep it up!*")
+        st.markdown('</div>', unsafe_allow_html=True)
+        
     with right:
-        st.markdown("### Strong Areas")
+        st.markdown('<div class="custom-card status-card-success" style="height: 100%;">', unsafe_allow_html=True)
+        st.markdown("#### 🟢 Strong Areas Mastered")
         strong_topics = trends.get("strong_topics", [])
         if strong_topics:
-            for topic in strong_topics:
-                st.write(f"- {topic}")
+            pill_html = "".join([f'<span class="pill-badge pill-badge-green">{topic}</span>' for topic in strong_topics])
+            st.markdown(f'<div style="margin-top:0.5rem;">{pill_html}</div>', unsafe_allow_html=True)
         else:
-            st.write("- None recorded yet")
+            st.write("*None recorded yet. Complete mock interviews to discover strengths!*")
+        st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown("### Insight")
-    if trends.get("readiness_score", 0) >= 80:
-        st.success("You are in strong interview shape. Focus on consistency and polish.")
-    elif trends.get("readiness_score", 0) >= 60:
-        st.info("You are progressing well. Strengthen weak areas and repeat a mock interview.")
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.subheader("💡 AI Coach Insight")
+    readiness = trends.get("readiness_score", 0)
+    if readiness >= 80:
+        st.markdown(
+            f"""
+            <div class="custom-card status-card-success" style="background: rgba(16, 185, 129, 0.08);">
+                <h4 style="color:#10b981; margin:0;">🚀 High Readiness ({readiness:.1f}%)</h4>
+                <p style="margin-top:0.5rem; margin-bottom:0; color:#cbd5e1;">
+                    You are in strong interview shape! Focus on consistency, high-level system architecture, and polishing minor details.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    elif readiness >= 60:
+        st.markdown(
+            f"""
+            <div class="custom-card status-card-info" style="background: rgba(59, 130, 246, 0.08);">
+                <h4 style="color:#3b82f6; margin:0;">⚡ Good Progress ({readiness:.1f}%)</h4>
+                <p style="margin-top:0.5rem; margin-bottom:0; color:#cbd5e1;">
+                    You are progressing well. Strengthen the weak areas highlighted above, follow the custom study roadmap, and repeat the mock interview to boost your scores.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
     else:
-        st.warning("You need focused practice. Review the roadmap and rerun the adaptive interview loop.")
+        st.markdown(
+            f"""
+            <div class="custom-card status-card-warning" style="background: rgba(245, 158, 11, 0.08);">
+                <h4 style="color:#f59e0b; margin:0;">⚠️ Needs Focused Practice ({readiness:.1f}%)</h4>
+                <p style="margin-top:0.5rem; margin-bottom:0; color:#cbd5e1;">
+                    You need focused practice. Spend extra time reviewing your personalized learning roadmap, study key concepts, and run the adaptive mock interview loop again.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
