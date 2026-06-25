@@ -14,5 +14,14 @@ docker-compose.yml
 *.log
 *.sqlite
 *.db
-src/data/embeddings
-src/data/raw_documents
+
+# Persistent runtime artifacts (mounted/created at runtime)
+src/data/app.db
+src/data/embeddings/
+src/data/raw_documents/
+src/data/memory/
+src/data/*.json
+src/data/*.sqlite3
+src/data/*.sqlite
+
+
